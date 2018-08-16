@@ -7,6 +7,7 @@ import Vuetify from 'vuetify'
 import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VeeValidate from "vee-validate";
 
 /* Ensure use css-loader */
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
@@ -16,6 +17,7 @@ Vue.config.productionTip = false
 
 Vue.use(Vuetify)
 Vue.use(VueAxios, axios)
+Vue.use(VeeValidate);
 
 /* eslint-disable no-new */
 new Vue({

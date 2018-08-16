@@ -6,11 +6,17 @@ import TaskGroup from '@/components/module/TaskGroup'
 import Workspace from '@/components/module/Workspace'
 import Files from '@/components/module/Files'
 import Connection from '@/components/module/Connection'
+import Login from '@/components/module/Login'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/',
+      name: 'Login',
+      component: Login
+    },
     { path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard
