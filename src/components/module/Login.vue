@@ -53,6 +53,7 @@ export default {
   methods: {
     confirm() {
       this.$validator.validateAll().then( result => {
+        this.$router.push("/dashboard")
         if (result) {
           this.isloading = true
           this.axios.post('/ousers/login', this.formLabelLogin).then(response => {
