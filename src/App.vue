@@ -92,45 +92,86 @@
             <v-btn fab bottom right color="pink" dark fixed @click.stop="dialog = !dialog">
                 <v-icon>add</v-icon>
             </v-btn>
-            <v-dialog v-model="dialog" width="800px">
-                <v-card>
-                    <v-card-title class="grey lighten-4 py-4 title">
-                        Create contact
-                    </v-card-title>
-                    <v-container grid-list-sm class="pa-4">
-                        <v-layout row wrap>
-                            <v-flex xs12 align-center justify-space-between>
-                                <v-layout align-center>
-                                    <v-avatar size="40px" class="mr-3">
-                                        <img src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png" alt="">
-                                    </v-avatar>
-                                    <v-text-field placeholder="Name"></v-text-field>
-                                </v-layout>
-                            </v-flex>
-                            <v-flex xs6>
-                                <v-text-field prepend-icon="business" placeholder="Company"></v-text-field>
-                            </v-flex>
-                            <v-flex xs6>
-                                <v-text-field placeholder="Job title"></v-text-field>
-                            </v-flex>
-                            <v-flex xs12>
-                                <v-text-field prepend-icon="mail" placeholder="Email"></v-text-field>
-                            </v-flex>
-                            <v-flex xs12>
-                                <v-text-field type="tel" prepend-icon="phone" placeholder="(000) 000 - 0000" mask="phone"></v-text-field>
-                            </v-flex>
-                            <v-flex xs12>
-                                <v-text-field prepend-icon="notes" placeholder="Notes"></v-text-field>
-                            </v-flex>
+            <v-dialog v-model="dialog" width="41.5%">
+                <v-stepper v-model="e1">
+                    <v-stepper-header>
+                      <v-stepper-step :complete="e1 > 1" step="1">Choose Type</v-stepper-step>
+
+                      <v-divider></v-divider>
+
+                      <v-stepper-step :complete="e1 > 2" step="2">Choose Task</v-stepper-step>
+
+                      <v-divider></v-divider>
+
+                      <v-stepper-step step="3">Choose Template</v-stepper-step>
+                    </v-stepper-header>
+
+                    <v-stepper-items>
+                      <v-stepper-content step="1">
+                        <v-card
+                          class="mb-3"
+                          color="grey lighten-1"
+                          height="220px"
+                        >
+                        </v-card>
+                        <v-divider></v-divider>
+                        <v-layout align-center justify-center row pt-2>
+                            <v-btn
+                              block
+                              color="primary"
+                              @click="e1 = 2"
+                              class="mr-1"
+                            >
+                              Continue
+                            </v-btn>
+
+                            <v-btn block disabled class="ml-1">Back</v-btn>
                         </v-layout>
-                    </v-container>
-                    <v-card-actions>
-                        <v-btn flat color="primary">More</v-btn>
-                        <v-spacer></v-spacer>
-                        <v-btn flat color="primary" @click="dialog = false">Cancel</v-btn>
-                        <v-btn flat @click="dialog = false">Save</v-btn>
-                    </v-card-actions>
-                </v-card>
+                      </v-stepper-content>
+
+                      <v-stepper-content step="2">
+                        <v-card
+                          class="mb-3"
+                          color="grey lighten-1"
+                          height="220px"
+                        ></v-card>
+                        <v-divider></v-divider>
+                        <v-layout align-center justify-center row pt-2>
+                            <v-btn
+                              block
+                              color="primary"
+                              @click="e1 = 3"
+                              class="mr-1"
+                            >
+                              Continue
+                            </v-btn>
+
+                            <v-btn block @click="e1 = 1" class="ml-1">Back</v-btn>
+                        </v-layout>
+                      </v-stepper-content>
+
+                      <v-stepper-content step="3">
+                        <v-card
+                          class="mb-3"
+                          color="grey lighten-1"
+                          height="220px"
+                        ></v-card>
+                        <v-divider></v-divider>
+                        <v-layout align-center justify-center row pt-2>
+                            <v-btn
+                              block
+                              color="primary"
+                              @click="submit()"
+                              class="mr-1"
+                            >
+                              Submit
+                            </v-btn>
+
+                            <v-btn block @click="e1 = 2" class="ml-1">Back</v-btn>
+                        </v-layout>
+                      </v-stepper-content>
+                    </v-stepper-items>
+                </v-stepper>
             </v-dialog>
         </v-app>
     </div>
@@ -145,6 +186,7 @@ export default {
     },
     data: () => ({
         dialog: false,
+        e1: 0,
         drawer: null,
         dialog2: false,
         isname: false,
@@ -156,7 +198,12 @@ export default {
     },
     methods: {
         quit() {
-            this.$router.push("/");
+            this.dialog2 = false
+            this.$router.push("/")
+        },
+        submit() {
+            this.dialog = false
+            this.e1 = 1
         }
     }
 };
