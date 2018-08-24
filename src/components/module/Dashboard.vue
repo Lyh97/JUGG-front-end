@@ -8,7 +8,7 @@
               <v-card-title
                 class="title pt-2 pb-1"
                 primary-title
-                style="color: purple"
+                style="color: purple;height: 30px;"
               >Lorem
               </v-card-title>
               <v-spacer></v-spacer>
@@ -16,8 +16,8 @@
               <v-btn icon small right @click=""><v-icon>zoom_out_map</v-icon></v-btn>
             </v-layout>
             <v-divider light></v-divider>
-            <v-card-text>
-              <ve-line :data="chartData" :ref="item.i" :width="item.newwidth" :height="item.newheight"></ve-line>
+            <v-card-text style="height: calc(100% - 35px);" class="pa-0">
+              <Count :timeStatus="true" :changeStatus="true"></Count>
             </v-card-text>
           </v-card>
         </v-flex>
@@ -86,6 +86,7 @@
 <script>
 import VueGridLayout from 'vue-grid-layout'
 import draggable from 'vuedraggable'
+import Count from './Count.vue'
 
 
 // var testLayout = [
@@ -133,7 +134,8 @@ export default {
   components: {
     'GridLayout': VueGridLayout.GridLayout,
     'GridItem': VueGridLayout.GridItem,
-    draggable
+    draggable,
+    Count
   },
   methods:{
     resizedEvent: function(i, newH, newW, newHPx, newWPx){
