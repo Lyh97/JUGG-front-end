@@ -1,20 +1,33 @@
 <template>
-    <v-card class='card red darken-2'>
-        <v-card-title primary class="title">Lorem</v-card-title>
-        <v-card-text>
-            <div class="card-body">
-                <div class="result-count">
-                    <span>{{Data.resultCount}}</span>
-                    <span v-if="changeStatus" class="result-change">
-                        <v-icon>arrow_upward</v-icon>
-                        <span>{{Data.resultChange}}</span>
-                    </span> 
+    <v-card class='card' color="fff" hover>
+        <v-layout align-center justify-center row>
+            <v-card-title
+            class="title pt-2 pb-1"
+            primary-title
+            style="color: purple;"
+            >Lorem
+            </v-card-title>
+            <v-spacer></v-spacer>
+            <v-btn icon small right @click="sheet = true"><v-icon>more_horiz</v-icon></v-btn>
+            <v-btn icon small right @click=""><v-icon>zoom_out_map</v-icon></v-btn>
+        </v-layout>
+        <v-divider light></v-divider>
+        <v-card-text class="card-text">
+            <v-layout align-center justify-center row fill-height>
+                <div class="card-body">
+                    <div class="result-count">
+                        <span>{{Data.resultCount}}</span>
+                        <span v-if="changeStatus" class="result-change">
+                            <v-icon>arrow_upward</v-icon>
+                            <span>{{Data.resultChange}}</span>
+                        </span> 
+                    </div>
+                    <div v-if="timeStatus" class="result-time">
+                        <span class="result-time-name">result-time: </span>
+                        {{Data.resultTime}}
+                    </div>
                 </div>
-                <div v-if="timeStatus" class="result-time">
-                    <span class="result-time-name">result-time: </span>
-                    {{Data.resultTime}}
-                </div>
-            </div>
+            </v-layout>
         </v-card-text>
     </v-card>
 </template>
@@ -42,14 +55,13 @@ export default {
 </script>
 <style>
     .card{
-        width: 250px;
-        height: 210px;
+        width: 350px;
+        height: 600px;
         margin:25px 0px 0px 25px;
     }
     .card-body {
         width: 100%;
-        height: 100%;
-        moz-user-select: -moz-none; 
+        -moz-user-select: -moz-none; 
         -moz-user-select: none; 
         -o-user-select:none; 
         -khtml-user-select:none; 
@@ -66,13 +78,16 @@ export default {
         font-size: 15px;
     }
     .result-time {
-        text-align: left;
+        text-align: center;
         font-size: 13px;
         margin-top: 21px; 
     }
     .result-time-name {
         font-size: 15px;
         font-weight: 500;
+    }
+    .card-text{
+        height: calc(100% - 40px);
     }
 </style>
 
