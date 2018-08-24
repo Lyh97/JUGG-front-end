@@ -1,5 +1,5 @@
 <template>
-    <v-card class='card' color="fff" hover>
+    <v-card class='card' height="100%" color="fff" hover>
         <v-layout align-center justify-center row>
             <v-card-title
             class="title pt-2 pb-1"
@@ -54,11 +54,6 @@ export default {
 }
 </script>
 <style>
-    .card{
-        width: 350px;
-        height: 600px;
-        margin:25px 0px 0px 25px;
-    }
     .card-body {
         width: 100%;
         -moz-user-select: -moz-none; 
@@ -80,7 +75,7 @@ export default {
     .result-time {
         text-align: center;
         font-size: 13px;
-        margin-top: 21px; 
+        /*margin-top: 5%;*/
     }
     .result-time-name {
         font-size: 15px;

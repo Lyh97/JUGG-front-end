@@ -3,23 +3,7 @@
     <grid-layout :layout="layout" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
       <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
         <v-flex fill-height wrap align-content-space-around>
-          <v-card color="fff" height="100%" hover>
-            <v-layout align-center justify-center row>
-              <v-card-title
-                class="title pt-2 pb-1"
-                primary-title
-                style="color: purple"
-              >Lorem
-              </v-card-title>
-              <v-spacer></v-spacer>
-              <v-btn icon small right @click="sheet = true"><v-icon>more_horiz</v-icon></v-btn>
-              <v-btn icon small right @click=""><v-icon>zoom_out_map</v-icon></v-btn>
-            </v-layout>
-            <v-divider light></v-divider>
-            <v-card-text>
-              <ve-line :data="chartData" :ref="item.i" :width="item.newwidth" :height="item.newheight"></ve-line>
-            </v-card-text>
-          </v-card>
+              <Count :timeStatus="true" :changeStatus="true"></Count>
         </v-flex>
       </grid-item>
     </grid-layout>
@@ -86,6 +70,7 @@
 <script>
 import VueGridLayout from 'vue-grid-layout'
 import draggable from 'vuedraggable'
+import Count from './Count.vue'
 
 
 // var testLayout = [
@@ -133,7 +118,8 @@ export default {
   components: {
     'GridLayout': VueGridLayout.GridLayout,
     'GridItem': VueGridLayout.GridItem,
-    draggable
+    draggable,
+    Count
   },
   methods:{
     resizedEvent: function(i, newH, newW, newHPx, newWPx){
