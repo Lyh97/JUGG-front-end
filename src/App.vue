@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <v-app id="inspire">
-            <v-navigation-drawer fixed :clipped="$vuetify.breakpoint.mdAndUp" app v-model="drawer">
+            <v-navigation-drawer fixed :clipped="$vuetify.breakpoint.mdAndUp" app v-model="drawer" width="220">
                 <navigation></navigation>
             </v-navigation-drawer>
             <v-toolbar color="blue darken-3" dark app :clipped-left="$vuetify.breakpoint.mdAndUp" fixed>
@@ -71,12 +71,12 @@
                         <v-card-actions>
                             <v-layout column pa-2>
                                 <v-flex>
-                                    <v-btn color="success" block @click="dialog2 = false">
-                                        Save
+                                    <v-btn style="background-color: rgb(46, 185, 38)" block @click="dialog2 = false">
+                                        <span style="color: #fff">Save</span>
                                     </v-btn>
                                 </v-flex>
                                 <v-flex pt-2>
-                                    <v-btn color="grey lighten-1" block @click="quit()">
+                                    <v-btn color="grey lighten-2" block @click="quit()">
                                         Quit
                                     </v-btn>
                                 </v-flex>
@@ -85,7 +85,7 @@
                     </v-card>
                 </v-dialog>
             </v-toolbar>
-            <v-content>
+            <v-content class="pb-5">
                 <router-view>
                 </router-view>
             </v-content>

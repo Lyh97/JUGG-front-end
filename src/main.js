@@ -15,9 +15,12 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
 
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api' : 'https://jugg.w3ibm.mybluemix.net/api'
+
 Vue.use(Vuetify)
 Vue.use(VueAxios, axios)
 Vue.use(VeeValidate);
+
 
 /* eslint-disable no-new */
 new Vue({

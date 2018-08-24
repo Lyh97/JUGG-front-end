@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;width: 100%; background-color: #eee;position: fixed;top: 0;left: 0; z-index: 999;">
+  <div style="height:100%;width: 100%; background-color: #eee;position: fixed;top: 0;left: 0; z-index: 999;" @keyup.enter="confirm()">
     <v-container fluid fill-height>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md5>
@@ -13,7 +13,7 @@
               </v-form>
             </v-card-text>
             <v-card-actions>
-              <v-btn large block color="primary" @click="confirm()">Login</v-btn>
+              <v-btn :loading="isloading" large block color="primary" @click="confirm()">Login</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -30,6 +30,7 @@ export default {
   },
   data: () => ({
     showtxt: "",
+    isloading: false,
     drawer: null,
     formLabelLogin: {
       email: "",
@@ -51,8 +52,17 @@ export default {
   },
   methods: {
     confirm() {
-      this.$validator.validateAll();
-      this.$router.push("/dashboard");
+      this.$validator.validateAll().then( result => {
+        if (result) {
+          this.isloading = true
+          this.axios.post('/ousers/login', this.formLabelLogin).then(response => {
+            this.isloading = false
+            this.$router.push("/dashboard")
+          }).catch(error => {
+            this.isloading = false
+          })
+        }
+      })
     }
   },
   mounted() {

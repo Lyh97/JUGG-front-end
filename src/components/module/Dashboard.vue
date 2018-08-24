@@ -42,6 +42,13 @@ export default {
     'GridItem': VueGridLayout.GridItem,
     draggable
   },
+  created: function() {
+    this.axios.get('/ousers/' + '5b750af429b2e9574a7ffa12', {params: {
+      'access_token': 'WhAOxY3oBUPVLctzcuGhf5mf1N9ssxzOwyKZyv2zHNc98m481zdXnQOxfEbKMZJF'
+    }}).then(response => {
+
+    })
+  }
 }
 
 </script>
