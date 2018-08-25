@@ -20,7 +20,7 @@
                         <span v-if="changeStatus" class="result-change">
                             <v-icon>arrow_upward</v-icon>
                             <span>{{Data.resultChange}}</span>
-                        </span> 
+                        </span>
                     </div>
                     <div v-if="timeStatus" class="result-time">
                         <span class="result-time-name">result-time: </span>
@@ -42,10 +42,10 @@ export default {
     },
     methods: {
         getCardData() {
-            this.axios.get('http://localhost:8080/static/config.json')
-        .then((response) => {
-            this.Data = response.data
-        })
+            this.axios.get('http://localhost:8081/static/config.json')
+            .then((response) => {
+                this.Data = response.data
+            })
         }
     },
     created: function() {
@@ -56,12 +56,12 @@ export default {
 <style>
     .card-body {
         width: 100%;
-        -moz-user-select: -moz-none; 
-        -moz-user-select: none; 
-        -o-user-select:none; 
-        -khtml-user-select:none; 
-        -webkit-user-select:none; 
-        -ms-user-select:none; 
+        -moz-user-select: -moz-none;
+        -moz-user-select: none;
+        -o-user-select:none;
+        -khtml-user-select:none;
+        -webkit-user-select:none;
+        -ms-user-select:none;
         user-select:none;
     }
     .result-count {

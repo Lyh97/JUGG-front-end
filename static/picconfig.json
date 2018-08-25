@@ -1,0 +1,39 @@
+{
+  "columns": [
+    "date",
+    "falsemoney",
+    "truemoney"
+  ],
+  "rows": [
+    {
+      "date": "1-1",
+      "falsemoney": "15",
+      "truemoney": "12"
+    },
+    {
+      "date": "1-2",
+      "falsemoney": "12",
+      "truemoney": "25"
+    },
+    {
+      "date": "1-3",
+      "falsemoney": "21",
+      "truemoney": "10"
+    },
+    {
+      "date": "1-4",
+      "falsemoney": "41",
+      "truemoney": "32"
+    },
+    {
+      "date": "1-5",
+      "falsemoney": "31",
+      "truemoney": "30"
+    },
+    {
+      "date": "1-6",
+      "falsemoney": "71",
+      "truemoney": "55"
+    }
+  ]
+}
