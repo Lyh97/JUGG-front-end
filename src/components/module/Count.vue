@@ -1,11 +1,7 @@
 <template>
     <v-card class='card' height="100%" color="fff" hover>
         <v-layout align-center justify-center row>
-            <v-card-title
-            class="title pt-2 pb-1"
-            primary-title
-            style="color: purple;"
-            >Lorem
+            <v-card-title class="title pt-2 pb-1" primary-title style="color: purple;" >Lorem
             </v-card-title>
             <v-spacer></v-spacer>
             <v-btn icon small right @click="sheet = true"><v-icon>more_horiz</v-icon></v-btn>

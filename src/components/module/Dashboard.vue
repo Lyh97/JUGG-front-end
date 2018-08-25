@@ -71,6 +71,7 @@
 import VueGridLayout from 'vue-grid-layout'
 import draggable from 'vuedraggable'
 import Count from './Count.vue'
+import CountTable from './CountTable.vue'
 
 
 // var testLayout = [
@@ -119,7 +120,8 @@ export default {
     'GridLayout': VueGridLayout.GridLayout,
     'GridItem': VueGridLayout.GridItem,
     draggable,
-    Count
+    Count,
+    CountTable
   },
   methods:{
     resizedEvent: function(i, newH, newW, newHPx, newWPx){
