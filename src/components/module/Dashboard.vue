@@ -3,8 +3,7 @@
     <grid-layout :layout="layout" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
       <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
         <v-flex fill-height wrap align-content-space-around>
-          <!-- <Count :timeStatus="true" :changeStatus="true"></Count> -->
-          <picboard :item="item"></picboard>
+          <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable>
         </v-flex>
       </grid-item>
     </grid-layout>
@@ -74,6 +73,7 @@ import draggable from 'vuedraggable'
 import Count from './Count.vue'
 import CountTable from './CountTable.vue'
 import Picboard from './Picboard.vue'
+import MoreTasksCountTable from './MoreTasksCountTable.vue'
 
 
 // var testLayout = [
@@ -113,7 +113,8 @@ export default {
     draggable,
     Count,
     CountTable,
-    Picboard
+    Picboard,
+    MoreTasksCountTable
   },
   methods:{
     resizedEvent: function(i, newH, newW, newHPx, newWPx){

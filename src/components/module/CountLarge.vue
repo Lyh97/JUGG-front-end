@@ -2,7 +2,7 @@
     <v-card class='card' height="100%" color="fff" hover>
         <v-layout align-center justify-center row>
             <v-card-title class="title pt-2 pb-1" primary-title style="color: purple;">
-                Lorem
+                {{ title }}
             </v-card-title>
             <v-spacer></v-spacer>
             <v-btn icon small right @click="sheet = true"><v-icon>more_horiz</v-icon></v-btn>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div v-if="tabStatus" class="card-larg-body">
-                    <v-data-iterator :items="items" :pagination.sync="pagination" content-tag="v-layout" hide-actions
+                    <v-data-iterator :items="items" content-tag="v-layout" hide-actions
                         row wrap>
                         <v-flex slot="item" slot-scope="props" xs12 sm12 md12 lg12>
                             <v-card>
@@ -70,7 +70,7 @@
                 <v-flex xs12 sm12 md12 lg12>
                     <div v-if="chartStatue" class="card-larg-body card-larg-chart">
                         <div class="result-count-chart">
-                            <ve-chart :toolbox="toolbox" :data="chartData" :settings="chartSettings" :visual-map="visualMap"></ve-chart>
+                            <ve-chart :toolbox="toolbox" :data="chartData" :settings="chartSettings"></ve-chart>
                         </div>
                     </div>
                 </v-flex>
@@ -81,7 +81,7 @@
 <script>
 export default {
     name: 'Count',
-    props: ['id','chartStatue','tabStatus', 'countStatus'],
+    props: ['id','chartStatue','tabStatus', 'countStatus', "title"],
     data() {
         this.toolbox = {
             feature: {
@@ -92,29 +92,10 @@ export default {
         let typeArr = ['line', 'histogram', 'pie'], index = 0;
         return {
             Data:[],
-            items: [
-                {
-                    value: false,
-                    name: 'Frozen Yogurt',
-                    calories: 159,
-                    fat: 6.0,
-                    carbs: 24,
-                    protein: 4.0,
-                    sodium: 87,
-                    calcium: '14%',
-                    iron: '1%'
-                }
-            ],
+            items: [],
             chartData: {
                 columns: ['日期', '访问用户'],
-                rows: [
-                    { '日期': '1月1日', '访问用户': 1523 },
-                    { '日期': '1月2日', '访问用户': 1223 },
-                    { '日期': '1月3日', '访问用户': 2123 },
-                    { '日期': '1月4日', '访问用户': 4123 },
-                    { '日期': '1月5日', '访问用户': 3123 },
-                    { '日期': '1月6日', '访问用户': 7123 }
-                ]
+                rows: []
             },
             chartSettings: { 
                 type: typeArr[index] 
@@ -125,7 +106,9 @@ export default {
         getCardData() {
             this.axios.get('http://localhost:8080/static/config.json')
         .then((response) => {
-            this.Data = response.data
+            this.Data = response.data.count
+            this.items = response.data.countTable
+            this.chartData.rows = response.data.row
         })
         },
         changeType: function () {

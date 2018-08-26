@@ -1,7 +1,8 @@
 <template>
     <v-card class='card' height="100%" color="fff" hover>
         <v-layout align-center justify-center row>
-            <v-card-title class="title pt-2 pb-1" primary-title style="color: purple;" >Lorem
+            <v-card-title class="title pt-2 pb-1" primary-title style="color: purple;" >
+                {{ title }}
             </v-card-title>
             <v-spacer></v-spacer>
             <v-btn icon small right @click="sheet = true"><v-icon>more_horiz</v-icon></v-btn>
@@ -10,11 +11,8 @@
         <v-divider light></v-divider>
         <v-card-text class="card-text">
             <v-layout align-center justify-center row fill-height>
-                <v-data-iterator :items="items" :rows-per-page-items="rowsPerPageItems"
-                    :pagination.sync="pagination" content-tag="v-layout" hide-actions row wrap>
-
-                    <v-flex slot="item" slot-scope="props" xs12 sm12 md12 lg12
-                    >
+                <v-data-iterator :items="items" content-tag="v-layout" hide-actions row wrap>
+                    <v-flex slot="item" slot-scope="props" xs12 sm12 md12 lg12>
                         <v-card>
                         <v-card-title class="subheading font-weight-bold">{{ props.item.name }}</v-card-title>
                         <v-divider></v-divider>
@@ -64,6 +62,7 @@
 <script>
 export default {
     name: 'CountTable',
+    props: ["title"],
     data() {
         return {
             items: [

@@ -1,7 +1,8 @@
 <template>
     <v-card class='card' height="100%" color="fff" hover>
         <v-layout align-center justify-center row>
-            <v-card-title class="title pt-2 pb-1" primary-title style="color: purple;" >Lorem
+            <v-card-title class="title pt-2 pb-1" primary-title style="color: purple;" >
+                {{ title }}
             </v-card-title>
             <v-spacer></v-spacer>
             <v-btn icon small right @click="sheet = true"><v-icon>more_horiz</v-icon></v-btn>
@@ -30,7 +31,7 @@
 <script>
 export default {
     name: 'Count',
-    props: ['id',"timeStatus","changeStatus"],
+    props: ['id',"timeStatus","changeStatus",'title'],
     data() {
         return {
             Data:[]
@@ -38,9 +39,9 @@ export default {
     },
     methods: {
         getCardData() {
-            this.axios.get('http://localhost:8081/static/config.json')
+            this.axios.get('http://localhost:8080/static/config.json')
             .then((response) => {
-                this.Data = response.data
+                this.Data = response.data.count;
             })
         }
     },
