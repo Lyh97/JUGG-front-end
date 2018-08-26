@@ -44,7 +44,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-bottom-sheet v-model="sheet">
+    <v-bottom-sheet v-model="this.$store.state.sheet" persistent>
       <v-card color="blue-grey">
         <v-layout align-center justify-center row class="grey darken-2">
           <v-card-title
@@ -60,6 +60,7 @@
           <v-btn dark color="error" small @click="dialog = true">
             <v-icon dark >fa-trash</v-icon>&nbsp;<span style="color: #333">remove</span>
           </v-btn>
+          <v-btn dark icon @click="closesheet()"><v-icon>close</v-icon></v-btn>
         </v-layout>
         <v-divider></v-divider>
         <v-card-text class="white">
@@ -102,8 +103,7 @@ export default {
         { 'x': 7, 'y': 8, 'w': 5, 'h': 9, 'i': '4', 'newwidth': '', 'newheight': '', 'index': 4},
         { 'x': 0, 'y': 11, 'w': 3, 'h': 6, 'i': '5', 'newwidth': '', 'newheight': '', 'index': 5},
         { 'x': 3, 'y': 11, 'w': 4, 'h': 6, 'i': '6', 'newwidth': '', 'newheight': '', 'index': 6},
-      ],
-      sheet: false
+      ]
     }
   },
   components: {
@@ -122,6 +122,9 @@ export default {
       this.layout[i]['newheight'] = newHPx.toString() + 'px'
       // this.newwidth = newWPx.toString() + 'px'
       // this.newheight = newHPx.toString() + 'px'
+    },
+    closesheet() {
+      this.$store.commit('sheetshow')
     }
   },
   created: function() {

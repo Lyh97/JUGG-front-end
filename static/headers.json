@@ -1,0 +1,15 @@
+{
+  "headers": [
+    {
+      "text": "Sql name",
+      "align": "left",
+      "sortable": false,
+      "value": "name"
+    },
+    { "text": "Success", "value": "success" },
+    { "text": "Failure", "value": "failure" },
+    { "text": "Retry success", "value": "retrySuccess" },
+    { "text": "Retry failure", "value": "retryFailure" },
+    { "text": "Success rate (%)", "value": "successRate" }
+  ]
+}
