@@ -39,7 +39,7 @@ export default {
     },
     methods: {
         getCardData() {
-            this.axios.get('http://localhost:8080/static/config.json')
+            this.axios.get('http://localhost:8081/static/config.json')
             .then((response) => {
                 this.Data = response.data.count;
             })

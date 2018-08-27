@@ -17,7 +17,7 @@
                         <span class="result-change">
                             <v-icon>arrow_upward</v-icon>
                             <span>{{Data.resultChange}}</span>
-                        </span> 
+                        </span>
                     </div>
                     <div class="result-time">
                         <span class="result-time-name">result-time: </span>
@@ -97,14 +97,14 @@ export default {
                 columns: ['日期', '访问用户'],
                 rows: []
             },
-            chartSettings: { 
-                type: typeArr[index] 
+            chartSettings: {
+                type: typeArr[index]
                 }
         }
     },
     methods: {
         getCardData() {
-            this.axios.get('http://localhost:8080/static/config.json')
+            this.axios.get('http://localhost:8081/static/config.json')
         .then((response) => {
             this.Data = response.data.count
             this.items = response.data.countTable
@@ -125,12 +125,12 @@ export default {
 <style>
     .card-larg-body {
         width: 100%;
-        -moz-user-select: -moz-none; 
-        -moz-user-select: none; 
+        -moz-user-select: -moz-none;
+        -moz-user-select: none;
         -o-user-select:none;
-        -khtml-user-select:none; 
-        -webkit-user-select:none; 
-        -ms-user-select:none; 
+        -khtml-user-select:none;
+        -webkit-user-select:none;
+        -ms-user-select:none;
         user-select:none;
     }
     .card-larg-chart {

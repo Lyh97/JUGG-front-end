@@ -3,7 +3,8 @@
     <grid-layout :layout="layout" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
       <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
         <v-flex fill-height wrap align-content-space-around>
-          <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable>
+          <!-- <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable> -->
+          <picboard :item="item"></picboard>
         </v-flex>
       </grid-item>
     </grid-layout>
