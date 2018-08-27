@@ -27,10 +27,14 @@
                         </v-avatar>
                     </v-btn>
                     <v-card>
-                        <v-container class="info" style="height: 110px;">
+                        <v-container class="info pa-0" style="height: 110px;">
+                            <v-layout align-start justify-end row>
+                                <v-btn small icon dark @click="edit()"><v-icon small>fa-pencil</v-icon></v-btn>
+                                <v-btn small icon dark @click="close()"><v-icon>close</v-icon></v-btn>
+                            </v-layout>
                             <v-layout justify-center>
                                 <v-tooltip bottom>
-                                    <v-btn slot="activator" dark icon fab large class="mt-4">
+                                    <v-btn slot="activator" dark icon fab large class="mt-3">
                                         <v-avatar :size="98" class="elevation-6">
                                             <img src="/static/head.JPG" alt="avatar">
                                         </v-avatar>
@@ -44,26 +48,18 @@
                                 <v-layout row wrap>
                                     <v-icon>person</v-icon>
                                     <v-text-field :disabled="!isname" label="Name"></v-text-field>
-                                    <v-btn color="purple" fab small dark @click="isname = !isname">
+                                    <!-- <v-btn color="purple" fab small dark @click="isname = !isname">
                                         <v-icon v-if="isname">close</v-icon>
                                         <v-icon v-else>create</v-icon>
-                                    </v-btn>
+                                    </v-btn> -->
                                 </v-layout>
                                 <v-layout row wrap>
                                     <v-icon>call</v-icon>
                                     <v-text-field :disabled="!isconnect" label="Connect"></v-text-field>
-                                    <v-btn color="pink" dark fab small @click="isconnect = !isconnect">
-                                        <v-icon v-if="isconnect">close</v-icon>
-                                        <v-icon v-else>create</v-icon>
-                                    </v-btn>
                                 </v-layout>
                                 <v-layout row wrap>
                                     <v-icon>business</v-icon>
                                     <v-text-field :disabled="!iscompany" label="Company"></v-text-field>
-                                    <v-btn color="warning" fab small @click="iscompany = !iscompany">
-                                        <v-icon v-if="iscompany">close</v-icon>
-                                        <v-icon v-else>create</v-icon>
-                                    </v-btn>
                                 </v-layout>
                             </v-layout>
                         </v-container>
@@ -71,7 +67,7 @@
                         <v-card-actions>
                             <v-layout column pa-2>
                                 <v-flex>
-                                    <v-btn style="background-color: rgb(46, 185, 38)" block @click="dialog2 = false">
+                                    <v-btn style="background-color: rgb(46, 185, 38)" block @click="save()">
                                         <span style="color: #fff">Save</span>
                                     </v-btn>
                                 </v-flex>
@@ -300,11 +296,25 @@ export default {
     methods: {
         quit() {
             this.dialog2 = false
+            this.edit()
             this.$router.push("/")
+        },
+        save() {
+            this.dialog2 = false
+            this.edit()
         },
         submit() {
             this.dialog = false
             this.e1 = 1
+        },
+        edit() {
+            this.isname = !this.isname
+            this.isconnect = !this.isconnect
+            this.iscompany = !this.iscompany
+        },
+        close() {
+            this.dialog2 = false
+            this.edit()
         },
         continueone() {
             this.e1 = 2

@@ -64,6 +64,70 @@
         </v-layout>
         <v-divider></v-divider>
         <v-card-text class="white">
+          <v-card>
+            <v-card-text>
+              <v-container fluid>
+                <v-layout row wrap>
+                  <v-flex xs12 sm3>
+                    <v-checkbox
+                      v-model="mode"
+                      label="Multi-line (mobile)"
+                      value="multi-line"
+                    ></v-checkbox>
+                  </v-flex>
+
+                  <v-flex xs12 sm3>
+                    <v-checkbox
+                      v-model="mode"
+                      label="Vertical (mobile)"
+                      value="vertical"
+                    ></v-checkbox>
+                  </v-flex>
+
+                  <v-flex xs12 sm4 offset-sm4>
+                    <v-text-field
+                      v-model="text"
+                      label="Text"
+                      type="text"
+                    ></v-text-field>
+                  </v-flex>
+
+                  <v-flex xs12 sm4>
+                    <v-text-field
+                      v-model.number="timeout"
+                      label="Timeout"
+                      type="number"
+                    ></v-text-field>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+
+              <v-btn
+                block
+                color="primary"
+                dark
+                @click="snackbar = true"
+              >
+                Show Snackbar
+              </v-btn>
+            </v-card-text>
+            <v-snackbar
+              v-model="snackbar"
+              :color="color"
+              :multi-line="mode === 'multi-line'"
+              :timeout="timeout"
+              :vertical="mode === 'vertical'"
+            >
+              {{ text }}
+              <v-btn
+                dark
+                flat
+                @click="snackbar = false"
+              >
+                Close
+              </v-btn>
+            </v-snackbar>
+          </v-card>
         </v-card-text>
       </v-card>
     </v-bottom-sheet>
@@ -105,7 +169,12 @@ export default {
         { 'x': 7, 'y': 8, 'w': 5, 'h': 9, 'i': '4', 'newwidth': '', 'newheight': '', 'index': 4},
         { 'x': 0, 'y': 11, 'w': 3, 'h': 6, 'i': '5', 'newwidth': '', 'newheight': '', 'index': 5},
         { 'x': 3, 'y': 11, 'w': 4, 'h': 6, 'i': '6', 'newwidth': '', 'newheight': '', 'index': 6},
-      ]
+      ],
+      snackbar: false,
+      color: '',
+      mode: '',
+      timeout: 6000,
+      text: 'Hello, I\'m a snackbar'
     }
   },
   components: {

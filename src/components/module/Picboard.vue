@@ -9,7 +9,7 @@
       </v-card-title>
       <v-spacer></v-spacer>
       <v-btn icon small right @click="opensheet()"><v-icon>more_horiz</v-icon></v-btn>
-      <v-btn icon small right @click=""><v-icon>zoom_out_map</v-icon></v-btn>
+      <v-btn icon small right @click="large()"><v-icon>zoom_out_map</v-icon></v-btn>
     </v-layout>
     <v-divider></v-divider>
     <v-card-text>
@@ -48,6 +48,9 @@
       },
       opensheet() {
         this.$store.commit('sheetshow')
+      },
+      large() {
+        // this.$router.push('/dashboard/chartlarge')
       }
     },
     created: function() {

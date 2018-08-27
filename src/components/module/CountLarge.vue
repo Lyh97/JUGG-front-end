@@ -70,7 +70,7 @@
                 <v-flex xs12 sm12 md12 lg12>
                     <div v-if="chartStatue" class="card-larg-body card-larg-chart">
                         <div class="result-count-chart">
-                            <ve-chart :toolbox="toolbox" :data="chartData" :settings="chartSettings" :grid="grid"></ve-chart>
+                            <ve-chart :toolbox="toolbox" :data="chartData" :settings="chartSettings"></ve-chart>
                         </div>
                     </div>
                 </v-flex>
@@ -83,11 +83,6 @@ export default {
     name: 'Count',
     props: ['id','chartStatue','tabStatus', 'countStatus', "title"],
     data() {
-        this.grid = {
-            show: true,
-            top: 35,
-            bottom: 15
-        }
         this.toolbox = {
             feature: {
                 magicType: {type: ['line', 'bar']},
