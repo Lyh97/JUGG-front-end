@@ -74,6 +74,9 @@
       </v-card>
     </v-dialog>
     <v-bottom-sheet v-model="this.$store.state.sheet" persistent>
+      <v-card style="margin:0px 10px 20px 10px;">
+        <MoreTasksCountTable></MoreTasksCountTable>
+      </v-card>
       <v-card color="blue-grey">
         <v-layout align-center justify-center row class="grey darken-2">
           <v-card-title
