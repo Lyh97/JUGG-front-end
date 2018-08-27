@@ -23,26 +23,6 @@
                             </v-list-tile>
 
                             <v-list-tile>
-                            <v-list-tile-content>Fat:</v-list-tile-content>
-                            <v-list-tile-content class="align-end">{{ props.item.fat }}</v-list-tile-content>
-                            </v-list-tile>
-
-                            <v-list-tile>
-                            <v-list-tile-content>Carbs:</v-list-tile-content>
-                            <v-list-tile-content class="align-end">{{ props.item.carbs }}</v-list-tile-content>
-                            </v-list-tile>
-
-                            <v-list-tile>
-                            <v-list-tile-content>Protein:</v-list-tile-content>
-                            <v-list-tile-content class="align-end">{{ props.item.protein }}</v-list-tile-content>
-                            </v-list-tile>
-
-                            <v-list-tile>
-                            <v-list-tile-content>Sodium:</v-list-tile-content>
-                            <v-list-tile-content class="align-end">{{ props.item.sodium }}</v-list-tile-content>
-                            </v-list-tile>
-
-                            <v-list-tile>
                             <v-list-tile-content>Calcium:</v-list-tile-content>
                             <v-list-tile-content class="align-end">{{ props.item.calcium }}</v-list-tile-content>
                             </v-list-tile>
@@ -70,10 +50,6 @@ export default {
                     value: false,
                     name: 'Frozen Yogurt',
                     calories: 159,
-                    fat: 6.0,
-                    carbs: 24,
-                    protein: 4.0,
-                    sodium: 87,
                     calcium: '14%',
                     iron: '1%'
                 }

@@ -5,8 +5,35 @@
       <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
         <v-flex fill-height wrap align-content-space-around>
           <!-- <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable> -->
+          <picboard :item="item"></picboard>
+          <!-- <Count></Count> -->
+        </v-flex>
+      </grid-item>
+    </grid-layout>
+    <grid-layout :layout="layouttwo" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
+      <grid-item v-for="item in layouttwo" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
+        <v-flex fill-height wrap align-content-space-around>
+          <!-- <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable> -->
           <!-- <picboard :item="item"></picboard> -->
           <Count></Count>
+        </v-flex>
+      </grid-item>
+    </grid-layout>
+    <grid-layout :layout="layoutthree" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
+      <grid-item v-for="item in layoutthree" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
+        <v-flex fill-height wrap align-content-space-around>
+          <!-- <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable> -->
+          <!-- <picboard :item="item"></picboard> -->
+          <CountTable></CountTable>
+        </v-flex>
+      </grid-item>
+    </grid-layout>
+    <grid-layout :layout="layoutfour" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
+      <grid-item v-for="item in layoutfour" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
+        <v-flex fill-height wrap align-content-space-around>
+          <!-- <picboard :item="item"></picboard> -->
+          <!-- <CountTable></CountTable> -->
+          <MoreTasksCountTable></MoreTasksCountTable>
         </v-flex>
       </grid-item>
     </grid-layout>
@@ -166,12 +193,27 @@ export default {
       lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
       layout: [
         { 'x': 0, 'y': 0, 'w': 6, 'h': 8, 'i': '0', 'newwidth': '', 'newheight': '', 'index': 0},
-        { 'x': 6, 'y': 0, 'w': 2, 'h': 8, 'i': '1', 'newwidth': '', 'newheight': '', 'index': 1},
-        { 'x': 8, 'y': 0, 'w': 4, 'h': 8, 'i': '2', 'newwidth': '', 'newheight': '', 'index': 2},
-        { 'x': 0, 'y': 8, 'w': 7, 'h': 3, 'i': '3', 'newwidth': '', 'newheight': '', 'index': 3},
-        { 'x': 7, 'y': 8, 'w': 5, 'h': 9, 'i': '4', 'newwidth': '', 'newheight': '', 'index': 4},
-        { 'x': 0, 'y': 11, 'w': 3, 'h': 6, 'i': '5', 'newwidth': '', 'newheight': '', 'index': 5},
-        { 'x': 3, 'y': 11, 'w': 4, 'h': 6, 'i': '6', 'newwidth': '', 'newheight': '', 'index': 6},
+        { 'x': 6, 'y': 0, 'w': 6, 'h': 8, 'i': '1', 'newwidth': '', 'newheight': '', 'index': 1},
+        { 'x': 0, 'y': 0, 'w': 4, 'h': 8, 'i': '2', 'newwidth': '', 'newheight': '', 'index': 2},
+        { 'x': 4, 'y': 0, 'w': 4, 'h': 8, 'i': '3', 'newwidth': '', 'newheight': '', 'index': 3},
+        { 'x': 8, 'y': 0, 'w': 4, 'h': 8, 'i': '4', 'newwidth': '', 'newheight': '', 'index': 4},
+        // { 'x': 8, 'y': 0, 'w': 4, 'h': 8, 'i': '2', 'newwidth': '', 'newheight': '', 'index': 2},
+        // { 'x': 0, 'y': 8, 'w': 7, 'h': 3, 'i': '3', 'newwidth': '', 'newheight': '', 'index': 3},
+        // { 'x': 7, 'y': 8, 'w': 5, 'h': 9, 'i': '4', 'newwidth': '', 'newheight': '', 'index': 4},
+        // { 'x': 0, 'y': 11, 'w': 3, 'h': 6, 'i': '5', 'newwidth': '', 'newheight': '', 'index': 5},
+        // { 'x': 3, 'y': 11, 'w': 4, 'h': 6, 'i': '6', 'newwidth': '', 'newheight': '', 'index': 6},
+      ],
+      layouttwo: [
+        { 'x': 0, 'y': 0, 'w': 4, 'h': 8, 'i': '2', 'newwidth': '', 'newheight': '', 'index': 2},
+        { 'x': 4, 'y': 0, 'w': 4, 'h': 8, 'i': '3', 'newwidth': '', 'newheight': '', 'index': 3},
+        { 'x': 8, 'y': 0, 'w': 4, 'h': 8, 'i': '4', 'newwidth': '', 'newheight': '', 'index': 4},
+      ],
+      layoutthree: [
+        { 'x': 0, 'y': 0, 'w': 6, 'h': 8, 'i': '5', 'newwidth': '', 'newheight': '', 'index': 5},
+        { 'x': 6, 'y': 0, 'w': 6, 'h': 8, 'i': '6', 'newwidth': '', 'newheight': '', 'index': 6},
+      ],
+      layoutfour: [
+        { 'x': 0, 'y': 0, 'w': 12, 'h':12, 'i': '7', 'newwidth': '', 'newheight': '', 'index': 7}
       ],
       snackbar: false,
       color: '',
