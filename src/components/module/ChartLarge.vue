@@ -5,14 +5,14 @@
                 {{ title }}
             </v-card-title>
             <v-spacer></v-spacer>
-            <v-btn icon small right @click="sheet = true"><v-icon>more_horiz</v-icon></v-btn>
-            <v-btn icon small right @click=""><v-icon>zoom_out_map</v-icon></v-btn>
+            <v-btn icon small right @click="opensheet()"><v-icon>more_horiz</v-icon></v-btn>
+            <v-btn icon small right @click="shrink()"><v-icon>fullscreen_exit</v-icon></v-btn>
         </v-layout>
         <v-divider light></v-divider>
         <v-card-text class="card-text">
             <v-layout align-center justify-center row fill-height>
                 <v-flex xs12 sm12 md12 lg12>
-                    <div v-if="chartStatue" class="card-larg-body card-larg-chart">
+                    <div class="card-larg-body card-larg-chart">
                         <div class="result-count-chart">
                             <ve-chart :toolbox="toolbox" :data="chartData" :settings="chartSettings" :grid="grid"></ve-chart>
                         </div>
@@ -49,7 +49,7 @@
 <script>
 export default {
     name: 'ChartLarge',
-    props: ['id','chartStatue','tabStatus', 'countStatus', "title"],
+    props: ['id','chartStatue','tabStatus', 'countStatus'],
     data() {
         this.grid = {
             show: true,
@@ -89,7 +89,8 @@ export default {
             },
             chartSettings: {
                 type: typeArr[index]
-                }
+            },
+            title: ''
         }
     },
     methods: {
@@ -98,12 +99,19 @@ export default {
         .then((response) => {
             this.chartData.rows = response.data.row
             this.desserts = response.data.desserts
+            this.title = response.data.title
         })
         },
         changeType: function () {
             this.index++
             if (this.index >= this.typeArr.length) { this.index = 0 }
             this.chartSettings = { type: this.typeArr[this.index] }
+        },
+        shrink() {
+            this.$router.push('/dashboard')
+        },
+        opensheet() {
+            this.$store.commit('sheetshow')
         }
     },
     created: function() {

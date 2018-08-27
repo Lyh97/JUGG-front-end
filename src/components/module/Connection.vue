@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Count title="Count" :timeStatus="true" :changeStatus="true"></Count>
-    <CountTable title="CountTable"></CountTable>
-    <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable>
-    <CountLarge title="CountLarge" :chartStatue="true" :tabStatus="true" :countStatus="true"></CountLarge>
-    <ChartLarge title="ChartLarge" :chartStatue="true" :tabStatus="true"></ChartLarge>
+    <Count></Count>
+    <CountTable></CountTable>
+    <MoreTasksCountTable></MoreTasksCountTable>
+    <CountLarge></CountLarge>
+    <ChartLarge></ChartLarge>
     <div style="height: 50px;"></div>
     <!-- <Picboard></Picboard> -->
   </div>

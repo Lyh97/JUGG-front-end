@@ -1,4 +1,5 @@
 {
+    "title": "ChartBoard",
     "count":
     {
         "taskid": "1001",
@@ -6,7 +7,7 @@
         "resultChange": 452,
         "resultTime": "2018-12-20 12:12:23"
     },
-    "countTable": 
+    "countTable":
     [
         {
             "value": false,

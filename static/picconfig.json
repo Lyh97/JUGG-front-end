@@ -1,5 +1,7 @@
 {
-  "columns": [
+  "title": "ChartBoard",
+  "chartData":{
+    "columns": [
     "date",
     "falsemoney",
     "truemoney"
@@ -36,4 +38,6 @@
       "truemoney": "55"
     }
   ]
+  }
+
 }

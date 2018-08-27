@@ -41,7 +41,7 @@
 <script>
 export default {
     name: 'MoreTasksCountTable',
-    props: ["title"],
+    // props: ["title"],
     data() {
         return {
             pagination: {
@@ -60,7 +60,8 @@ export default {
                 { text: 'Protein (g)', value: 'protein' },
                 { text: 'Iron (%)', value: 'iron' }
             ],
-            desserts: []
+            desserts: [],
+            title: ''
         }
     },
     methods: {
@@ -68,6 +69,7 @@ export default {
             this.axios.get('http://localhost:8081/static/config.json')
         .then((response) => {
             this.desserts = response.data.desserts
+            this.title = response.data.title
         })
         },
         changeSort (column) {

@@ -5,8 +5,8 @@
                 {{ title }}
             </v-card-title>
             <v-spacer></v-spacer>
-            <v-btn icon small right @click="sheet = true"><v-icon>more_horiz</v-icon></v-btn>
-            <v-btn icon small right @click=""><v-icon>zoom_out_map</v-icon></v-btn>
+            <v-btn icon small right @click="opensheet()"><v-icon>more_horiz</v-icon></v-btn>
+            <v-btn icon small right @click="large()"><v-icon>zoom_out_map</v-icon></v-btn>
         </v-layout>
         <v-divider light></v-divider>
         <v-card-text class="card-text">
@@ -14,12 +14,12 @@
                 <div class="card-body">
                     <div class="result-count">
                         <span>{{Data.resultCount}}</span>
-                        <span v-if="changeStatus" class="result-change">
+                        <span class="result-change">
                             <v-icon>arrow_upward</v-icon>
                             <span>{{Data.resultChange}}</span>
                         </span>
                     </div>
-                    <div v-if="timeStatus" class="result-time">
+                    <div class="result-time">
                         <span class="result-time-name">result-time: </span>
                         {{Data.resultTime}}
                     </div>
@@ -31,18 +31,26 @@
 <script>
 export default {
     name: 'Count',
-    props: ['id',"timeStatus","changeStatus",'title'],
+    props: ['id',"timeStatus","changeStatus"],
     data() {
         return {
-            Data:[]
+            Data:[],
+            title: ''
         }
     },
     methods: {
         getCardData() {
             this.axios.get('http://localhost:8081/static/config.json')
             .then((response) => {
-                this.Data = response.data.count;
+                this.Data = response.data.count
+                this.title = response.data.title
             })
+        },
+        large() {
+            this.$router.push('/dashboard/countlarge')
+        },
+        opensheet() {
+            this.$store.commit('sheetshow')
         }
     },
     created: function() {

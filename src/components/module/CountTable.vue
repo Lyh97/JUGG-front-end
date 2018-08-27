@@ -62,7 +62,7 @@
 <script>
 export default {
     name: 'CountTable',
-    props: ["title"],
+    // props: ["title"],
     data() {
         return {
             items: [
@@ -77,7 +77,8 @@ export default {
                     calcium: '14%',
                     iron: '1%'
                 }
-            ]
+            ],
+            title: ''
         }
     },
     methods: {
@@ -85,6 +86,7 @@ export default {
             this.axios.get('http://localhost:8081/static/config.json')
         .then((response) => {
             this.Data = response.data
+            this.title = response.data.title
         })
         }
     },

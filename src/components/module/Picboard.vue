@@ -5,7 +5,8 @@
         class="title pt-2 pb-1"
         primary-title
         style="color: purple;"
-      >Lorem
+      >
+        {{title}}
       </v-card-title>
       <v-spacer></v-spacer>
       <v-btn icon small right @click="opensheet()"><v-icon>more_horiz</v-icon></v-btn>
@@ -36,21 +37,23 @@
         }
       }
       return {
-        chartData: []
+        chartData: [],
+        title: ''
       }
     },
     methods: {
       getchartData() {
         this.axios.get('http://localhost:8081/static/picconfig.json')
         .then((response)=>{
-          this.chartData = response.data
+          this.chartData = response.data.chartData
+          this.title = response.data.title
         })
       },
       opensheet() {
         this.$store.commit('sheetshow')
       },
       large() {
-        // this.$router.push('/dashboard/chartlarge')
+        this.$router.push('/dashboard/chartlarge')
       }
     },
     created: function() {

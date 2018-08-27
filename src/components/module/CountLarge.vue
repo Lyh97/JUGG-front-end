@@ -5,13 +5,13 @@
                 {{ title }}
             </v-card-title>
             <v-spacer></v-spacer>
-            <v-btn icon small right @click="sheet = true"><v-icon>more_horiz</v-icon></v-btn>
-            <v-btn icon small right @click=""><v-icon>zoom_out_map</v-icon></v-btn>
+            <v-btn icon small right @click="opensheet()"><v-icon>more_horiz</v-icon></v-btn>
+            <v-btn icon small right @click="shrink()"><v-icon>fullscreen_exit</v-icon></v-btn>
         </v-layout>
         <v-divider light></v-divider>
         <v-card-text class="card-text">
             <v-layout align-center justify-center row fill-height>
-                <div v-if="countStatus" class="card-larg-body">
+                <div class="card-larg-body">
                     <div class="result-count">
                         <span>{{Data.resultCount}}</span>
                         <span class="result-change">
@@ -24,7 +24,7 @@
                         {{Data.resultTime}}
                     </div>
                 </div>
-                <div v-if="tabStatus" class="card-larg-body">
+                <div class="card-larg-body">
                     <v-data-iterator :items="items" content-tag="v-layout" hide-actions
                         row wrap>
                         <v-flex slot="item" slot-scope="props" xs12 sm12 md12 lg12>
@@ -81,7 +81,7 @@
 <script>
 export default {
     name: 'Count',
-    props: ['id','chartStatue','tabStatus', 'countStatus', "title"],
+    props: ['id','chartStatue','tabStatus', 'countStatus'],
     data() {
         this.toolbox = {
             feature: {
@@ -99,7 +99,8 @@ export default {
             },
             chartSettings: {
                 type: typeArr[index]
-                }
+            },
+            title: ''
         }
     },
     methods: {
@@ -109,12 +110,19 @@ export default {
             this.Data = response.data.count
             this.items = response.data.countTable
             this.chartData.rows = response.data.row
+            this.title = response.data.title
         })
         },
         changeType: function () {
             this.index++
             if (this.index >= this.typeArr.length) { this.index = 0 }
             this.chartSettings = { type: this.typeArr[this.index] }
+        },
+        shrink() {
+            this.$router.push('/dashboard')
+        },
+        opensheet() {
+            this.$store.commit('sheetshow')
         }
     },
     created: function() {

@@ -7,6 +7,8 @@ import Workspace from '@/components/module/Workspace'
 import Files from '@/components/module/Files'
 import Connection from '@/components/module/Connection'
 import Login from '@/components/module/Login'
+import ChartLarge from '@/components/module/ChartLarge'
+import CountLarge from '@/components/module/CountLarge'
 
 Vue.use(Router)
 
@@ -19,7 +21,17 @@ export default new Router({
     },
     { path: '/dashboard',
       name: 'Dashboard',
-      component: Dashboard
+      component: Dashboard,
+      children: [
+        {
+          path: 'chartlarge',
+          component: ChartLarge
+        },
+        {
+          path: 'countlarge',
+          component: CountLarge
+        }
+      ]
     },
     {
     	path: '/tasks',
@@ -46,5 +58,10 @@ export default new Router({
     	name: 'Connection',
     	component: Connection
     }
+    // {
+    //   path: '/chartlarge',
+    //   name: 'ChartLarge',
+    //   component: ChartLarge
+    // }
   ]
 })
