@@ -1,12 +1,13 @@
 <template>
   <v-container fluid grid-list-md>
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
     <grid-layout :layout="layout" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
       <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent" @moved="moved">
         <v-flex fill-height wrap align-content-space-around>
           <!-- <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable> -->
             <component :is="item.CardType" :item="item"></component>
           <!-- <CountTable></CountTable> -->
+
         </v-flex>
       </grid-item>
     </grid-layout>
@@ -239,7 +240,7 @@
                             <v-btn dark color="success" small @click="submit('Count')">
                                 <v-icon dark >fa-book</v-icon>&nbsp;<span style="color: #333">Text</span>
                             </v-btn>
-                            <v-btn dark color="warning" small @click="submit('Picbroad')">
+                            <v-btn dark color="warning" small @click="submit('Picboard')">
                                 <v-icon dark >fa-line-chart</v-icon>&nbsp;<span style="color: #333">Chart</span>
                             </v-btn>
                             <v-btn dark color="error" small @click="submit('CountTable')">
@@ -263,6 +264,7 @@
             </v-stepper-items>
         </v-stepper>
     </v-dialog>
+
   </v-container>
 </template>
 <script>
@@ -362,12 +364,14 @@ export default {
     ,
     getdessertData() {
         this.axios.get('http://localhost:8080/static/desserts.json')
+
         .then((response) => {
             this.desserts = response.data.desserts
         })
     },
     getheaderData() {
         this.axios.get('http://localhost:8080/static/headers.json')
+
         .then((response) => {
             this.headers = response.data.headers
         })
@@ -380,7 +384,6 @@ export default {
     // })
     this.getdessertData()
     this.getheaderData()
-    
   }
 }
 

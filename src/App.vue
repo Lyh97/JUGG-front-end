@@ -106,6 +106,7 @@ export default {
         isname: false,
         isconnect: false,
         iscompany: false
+
     }),
     props: {
         source: String
@@ -135,7 +136,7 @@ export default {
 
     },
     created: function() {
-        
+
     }
 }
 </script>

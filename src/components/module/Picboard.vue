@@ -1,10 +1,10 @@
-<template>
-  <v-card height="100%" color="fff" hover>
+<template id="picboard">
+  <v-card height="100%" color="grey darken-2" hover>
     <v-layout align-center justify-center row>
       <v-card-title
-        class="title pt-2 pb-1"
+        class="subheading pt-2 pb-1 font-weight-bold"
         primary-title
-        style="color: purple;"
+        style="color: #fff;"
       >
         {{title}}
       </v-card-title>
@@ -13,7 +13,7 @@
       <v-btn icon small right @click="large()"><v-icon>zoom_out_map</v-icon></v-btn>
     </v-layout>
     <v-divider></v-divider>
-    <v-card-text>
+    <v-card-text style="background-color: #fff">
       <ve-line
         :data="chartData"
         :toolbox="toolbox"
@@ -53,6 +53,7 @@
         this.$store.commit('sheetshow')
       },
       large() {
+        this.$store.commit('openlarge')
         this.$router.push('/dashboard/chartlarge')
       }
     },
