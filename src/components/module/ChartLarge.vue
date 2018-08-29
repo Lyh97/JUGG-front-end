@@ -108,6 +108,7 @@ export default {
             this.chartSettings = { type: this.typeArr[this.index] }
         },
         shrink() {
+            this.$store.commit('openlarge')
             this.$router.push('/dashboard')
         },
         opensheet() {

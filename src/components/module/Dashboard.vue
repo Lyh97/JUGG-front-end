@@ -1,39 +1,13 @@
 <template>
   <v-container fluid grid-list-md>
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
     <grid-layout :layout="layout" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
       <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
         <v-flex fill-height wrap align-content-space-around>
           <!-- <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable> -->
-          <picboard :item="item"></picboard>
+          <!-- <picboard :item="item"></picboard> -->
           <!-- <Count></Count> -->
-        </v-flex>
-      </grid-item>
-    </grid-layout>
-    <grid-layout :layout="layouttwo" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
-      <grid-item v-for="item in layouttwo" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
-        <v-flex fill-height wrap align-content-space-around>
-          <!-- <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable> -->
-          <!-- <picboard :item="item"></picboard> -->
-          <Count></Count>
-        </v-flex>
-      </grid-item>
-    </grid-layout>
-    <grid-layout :layout="layoutthree" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
-      <grid-item v-for="item in layoutthree" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
-        <v-flex fill-height wrap align-content-space-around>
-          <!-- <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable> -->
-          <!-- <picboard :item="item"></picboard> -->
-          <CountTable></CountTable>
-        </v-flex>
-      </grid-item>
-    </grid-layout>
-    <grid-layout :layout="layoutfour" :col-num="12" :row-height="30" :is-draggable="draggable" :is-resizable="resizable" :vertical-compact="true" :use-css-transforms="true">
-      <grid-item v-for="item in layoutfour" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" @resized="resizedEvent">
-        <v-flex fill-height wrap align-content-space-around>
-          <!-- <picboard :item="item"></picboard> -->
-          <!-- <CountTable></CountTable> -->
-          <MoreTasksCountTable></MoreTasksCountTable>
+          <component :is="item.type" :item="item"></component>
         </v-flex>
       </grid-item>
     </grid-layout>
@@ -164,6 +138,181 @@
       </v-card>
     </v-bottom-sheet>
     <!-- <router-view></router-view> -->
+    <v-dialog v-model="this.$store.state.large">
+      <router-view></router-view>
+    </v-dialog>
+    <v-dialog v-model="this.$store.state.dashboard_dialog" :width="dialogwidth">
+                <v-stepper v-model="e1">
+                    <v-stepper-header>
+                      <v-stepper-step :complete="e1 > 1" step="1">Choose Type</v-stepper-step>
+
+                      <v-divider></v-divider>
+
+                      <v-stepper-step :complete="e1 > 2" step="2">Choose Task</v-stepper-step>
+
+                      <v-divider></v-divider>
+
+                      <v-stepper-step step="3">Choose Template</v-stepper-step>
+                    </v-stepper-header>
+
+                    <v-stepper-items>
+                      <v-stepper-content step="1">
+                        <v-card>
+                            <v-card-title
+                            primary-title
+                            class="title"
+                            >Please choose your task type</v-card-title>
+                            <v-divider></v-divider>
+                            <v-card-text>
+                                <v-container fluid>
+                                    <v-layout row wrap align-center>
+                                      <v-flex xs6>
+                                        <v-subheader>Type items</v-subheader>
+                                      </v-flex>
+
+                                      <v-flex xs6>
+                                        <v-select
+                                          v-model="select"
+                                          :hint="`${select.state}, ${select.abbr}`"
+                                          :items="items"
+                                          item-text="state"
+                                          item-value="abbr"
+                                          label="Select"
+                                          persistent-hint
+                                          return-object
+                                          single-line
+                                        ></v-select>
+                                      </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-card-text>
+                        </v-card>
+                        <v-divider></v-divider>
+                        <v-layout align-center justify-center row pt-2>
+                            <v-btn
+                              block
+                              color="primary"
+                              @click="continueone()"
+                              class="mr-1"
+                            >
+                              Continue
+                            </v-btn>
+
+                            <v-btn block disabled class="ml-1">Back</v-btn>
+                        </v-layout>
+                      </v-stepper-content>
+
+                      <v-stepper-content step="2">
+                        <v-card>
+                            <v-card-title
+                                primary-title
+                                class="title"
+                            >
+                                Choose task
+                              <v-spacer></v-spacer>
+                              <v-text-field
+                                v-model="search"
+                                append-icon="search"
+                                label="Search"
+                                single-line
+                                hide-details
+                              ></v-text-field>
+                            </v-card-title>
+                            <v-divider></v-divider>
+                            <v-card-text>
+                                <v-data-table
+                                    :headers="headers"
+                                    :items="desserts"
+                                    :search="search"
+                                    v-model="selected"
+                                    item-key="name"
+                                    select-all
+                                    class="elevation-1"
+                                  >
+                                    <template slot="headerCell" slot-scope="props">
+                                      <v-tooltip bottom>
+                                        <span slot="activator">
+                                          {{ props.header.text }}
+                                        </span>
+                                        <span>
+                                          {{ props.header.text }}
+                                        </span>
+                                      </v-tooltip>
+                                    </template>
+                                    <template slot="items" slot-scope="props">
+                                      <td>
+                                        <v-checkbox
+                                          v-model="props.selected"
+                                          primary
+                                          hide-details
+                                        ></v-checkbox>
+                                      </td>
+                                      <td>{{ props.item.name }}</td>
+                                      <td class="text-xs-right">{{ props.item.success }}</td>
+                                      <td class="text-xs-right">{{ props.item.failure }}</td>
+                                      <td class="text-xs-right">{{ props.item.retrySuccess }}</td>
+                                      <td class="text-xs-right">{{ props.item.retryFailure}}</td>
+                                      <td class="text-xs-right">{{ props.item.successRate}}</td>
+                                    </template>
+                                </v-data-table>
+                            </v-card-text>
+                        </v-card>
+                        <v-divider></v-divider>
+                        <v-layout align-center justify-center row pt-2>
+                            <v-btn
+                              block
+                              color="primary"
+                              @click="continuetwo()"
+                              class="mr-1"
+                            >
+                              Continue
+                            </v-btn>
+
+                            <v-btn block @click="backone()" class="ml-1">Back</v-btn>
+                        </v-layout>
+                      </v-stepper-content>
+
+                      <v-stepper-content step="3">
+                        <v-card>
+                            <v-card-title
+                                primary-title
+                                class="title"
+                            >Choose your Template</v-card-title>
+                            <v-divider></v-divider>
+                            <v-card-text>
+                                <v-layout align-center justify-center row>
+                                    <v-btn dark color="success" small @click="submit('Count')">
+                                        <v-icon dark >fa-book</v-icon>&nbsp;<span style="color: #333">Text</span>
+                                    </v-btn>
+                                    <v-btn dark color="warning" small @click="submit('Picboard')">
+                                        <v-icon dark >fa-line-chart</v-icon>&nbsp;<span style="color: #333">Chart</span>
+                                    </v-btn>
+                                    <v-btn dark color="error" small @click="submit('CountTable')">
+                                        <v-icon dark >fa-table</v-icon>&nbsp;<span style="color: #333">Table</span>
+                                    </v-btn>
+                                    <v-btn dark color="info" small @click="submit()">
+                                        <v-icon dark >fa-object-group</v-icon>&nbsp;<span style="color: #333">All</span>
+                                    </v-btn>
+                                </v-layout>
+                            </v-card-text>
+                        </v-card>
+                        <v-divider></v-divider>
+                        <v-layout align-center justify-center row pt-2>
+                            <v-btn
+                              block
+                              color="primary"
+                              class="mr-1"
+                              disabled
+                            >
+                              Continue
+                            </v-btn>
+
+                            <v-btn block @click="backtwo()" class="ml-1">Back</v-btn>
+                        </v-layout>
+                      </v-stepper-content>
+                    </v-stepper-items>
+                </v-stepper>
+            </v-dialog>
   </v-container>
 </template>
 <script>
@@ -189,34 +338,30 @@ export default {
   data() {
     return {
       dialog: false,
+      dialogwidth: '41%',
+      e1: 0,
+      select: { state: 'Select count *', abbr: 'Count * ' },
+      items: [
+        { state: 'Select count *', abbr: 'Count * ' },
+        { state: 'Select *', abbr: '*' }
+      ],
+      search: '',
+      selected: [],
+      headers: [],
+      desserts: [],
       // layout: testLayout,
       draggable: true,
       resizable: true,
       index: 0,
       lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
       layout: [
-        { 'x': 0, 'y': 0, 'w': 6, 'h': 8, 'i': '0', 'newwidth': '', 'newheight': '', 'index': 0},
-        { 'x': 6, 'y': 0, 'w': 6, 'h': 8, 'i': '1', 'newwidth': '', 'newheight': '', 'index': 1},
-        { 'x': 0, 'y': 0, 'w': 4, 'h': 8, 'i': '2', 'newwidth': '', 'newheight': '', 'index': 2},
-        { 'x': 4, 'y': 0, 'w': 4, 'h': 8, 'i': '3', 'newwidth': '', 'newheight': '', 'index': 3},
-        { 'x': 8, 'y': 0, 'w': 4, 'h': 8, 'i': '4', 'newwidth': '', 'newheight': '', 'index': 4},
-        // { 'x': 8, 'y': 0, 'w': 4, 'h': 8, 'i': '2', 'newwidth': '', 'newheight': '', 'index': 2},
-        // { 'x': 0, 'y': 8, 'w': 7, 'h': 3, 'i': '3', 'newwidth': '', 'newheight': '', 'index': 3},
-        // { 'x': 7, 'y': 8, 'w': 5, 'h': 9, 'i': '4', 'newwidth': '', 'newheight': '', 'index': 4},
-        // { 'x': 0, 'y': 11, 'w': 3, 'h': 6, 'i': '5', 'newwidth': '', 'newheight': '', 'index': 5},
-        // { 'x': 3, 'y': 11, 'w': 4, 'h': 6, 'i': '6', 'newwidth': '', 'newheight': '', 'index': 6},
-      ],
-      layouttwo: [
-        { 'x': 0, 'y': 0, 'w': 4, 'h': 8, 'i': '2', 'newwidth': '', 'newheight': '', 'index': 2},
-        { 'x': 4, 'y': 0, 'w': 4, 'h': 8, 'i': '3', 'newwidth': '', 'newheight': '', 'index': 3},
-        { 'x': 8, 'y': 0, 'w': 4, 'h': 8, 'i': '4', 'newwidth': '', 'newheight': '', 'index': 4},
-      ],
-      layoutthree: [
-        { 'x': 0, 'y': 0, 'w': 6, 'h': 8, 'i': '5', 'newwidth': '', 'newheight': '', 'index': 5},
-        { 'x': 6, 'y': 0, 'w': 6, 'h': 8, 'i': '6', 'newwidth': '', 'newheight': '', 'index': 6},
-      ],
-      layoutfour: [
-        { 'x': 0, 'y': 0, 'w': 12, 'h':12, 'i': '7', 'newwidth': '', 'newheight': '', 'index': 7}
+          { 'x': 0, 'y': 0, 'w': 6, 'h': 8, 'i': '0', 'newwidth': '', 'newheight': '', 'index': 0, 'type':'Count'},
+          { 'x': 6, 'y': 0, 'w': 2, 'h': 8, 'i': '1', 'newwidth': '', 'newheight': '', 'index': 1, 'type':'Picboard'},
+          { 'x': 8, 'y': 0, 'w': 4, 'h': 8, 'i': '2', 'newwidth': '', 'newheight': '', 'index': 2, 'type':'CountTable'},
+          { 'x': 0, 'y': 8, 'w': 7, 'h': 3, 'i': '3', 'newwidth': '', 'newheight': '', 'index': 3, 'type':'Picboard'},
+          { 'x': 7, 'y': 8, 'w': 5, 'h': 9, 'i': '4', 'newwidth': '', 'newheight': '', 'index': 4, 'type':'count'},
+          { 'x': 0, 'y': 11, 'w': 3, 'h': 6, 'i': '5', 'newwidth': '', 'newheight': '', 'index': 5, 'type':'count'},
+          { 'x': 3, 'y': 11, 'w': 4, 'h': 6, 'i': '6', 'newwidth': '', 'newheight': '', 'index': 6, 'type':'count'},
       ],
       snackbar: false,
       color: '',
@@ -246,6 +391,41 @@ export default {
     },
     closesheet() {
       this.$store.commit('sheetshow')
+    },
+    submit(Type) {
+      let newCard = { 'x': 0, 'y': 0, 'w': 6, 'h': 8, 'i': this.layout.length.toString(), 'newwidth': '', 'newheight': '', 'index': this.layout.length, 'type': Type}
+      this.layout.unshift(newCard)
+      this.$store.commit('changedashboard_dialog')
+      this.e1 = 1
+
+    },
+    continueone() {
+      this.e1 = 2
+      this.dialogwidth = '70%'
+    },
+    continuetwo() {
+      this.e1 = 3
+      this.dialogwidth = '41%'
+    },
+    backone () {
+        this.e1 = 1
+        this.dialogwidth = '41%'
+    },
+    backtwo() {
+        this.e1 = 2
+        this.dialogwidth = '70%'
+    },
+    getdessertData() {
+        this.axios.get('http://localhost:8081/static/desserts.json')
+        .then((response) => {
+            this.desserts = response.data.desserts
+        })
+    },
+    getheaderData() {
+        this.axios.get('http://localhost:8081/static/headers.json')
+        .then((response) => {
+            this.headers = response.data.headers
+        })
     }
   },
   created: function() {
@@ -254,6 +434,8 @@ export default {
     // }}).then(response => {
 
     // })
+    this.getdessertData()
+    this.getheaderData()
   }
 }
 

@@ -68,7 +68,7 @@
             </v-layout>
             <v-layout align-center justify-center fill-height>
                 <v-flex xs12 sm12 md12 lg12>
-                    <div v-if="chartStatue" class="card-larg-body card-larg-chart">
+                    <div class="card-larg-body card-larg-chart">
                         <div class="result-count-chart">
                             <ve-chart :toolbox="toolbox" :data="chartData" :settings="chartSettings"></ve-chart>
                         </div>
@@ -119,6 +119,7 @@ export default {
             this.chartSettings = { type: this.typeArr[this.index] }
         },
         shrink() {
+            this.$store.commit('openlarge')
             this.$router.push('/dashboard')
         },
         opensheet() {

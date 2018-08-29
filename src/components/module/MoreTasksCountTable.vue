@@ -9,7 +9,7 @@
             <v-btn icon small right @click=""><v-icon>zoom_out_map</v-icon></v-btn>
         </v-layout>
         <v-divider light></v-divider>
-        <v-card-text class="card-text">
+        <v-card-text class="card-text" style="">
             <v-layout align-center justify-center row fill-height>
                 <v-data-table v-model="selected" :headers="headers" :items="desserts"
                     :pagination.sync="pagination" select-all item-key="name" class="elevation-1">

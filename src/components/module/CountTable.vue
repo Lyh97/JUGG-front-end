@@ -9,14 +9,14 @@
             <v-btn icon small right @click=""><v-icon>zoom_out_map</v-icon></v-btn>
         </v-layout>
         <v-divider light></v-divider>
-        <v-card-text class="card-text">
+        <v-card-text class="card-text" style="">
             <v-layout align-center justify-center row fill-height>
                 <v-data-iterator :items="items" content-tag="v-layout" hide-actions row wrap>
                     <v-flex slot="item" slot-scope="props" xs12 sm12 md12 lg12>
-                        <v-card>
+                        <v-card color="">
                         <v-card-title class="subheading font-weight-bold">{{ props.item.name }}</v-card-title>
                         <v-divider></v-divider>
-                        <v-list dense>
+                        <v-list dense style="">
                             <v-list-tile>
                             <v-list-tile-content>Calories:</v-list-tile-content>
                             <v-list-tile-content class="align-end">{{ props.item.calories }}</v-list-tile-content>

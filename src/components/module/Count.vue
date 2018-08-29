@@ -1,7 +1,7 @@
-<template>
-    <v-card class='card' height="100%" color="fff" hover>
+<template id="count">
+    <v-card class='card' height="100%" color="grey darken-2" hover>
         <v-layout align-center justify-center row>
-            <v-card-title class="title pt-2 pb-1" primary-title style="color: purple;" >
+            <v-card-title class="subheading pt-2 pb-1 font-weight-bold" primary-title style="color: #fff;" >
                 {{ title }}
             </v-card-title>
             <v-spacer></v-spacer>
@@ -9,7 +9,7 @@
             <v-btn icon small right @click="large()"><v-icon>zoom_out_map</v-icon></v-btn>
         </v-layout>
         <v-divider light></v-divider>
-        <v-card-text class="card-text">
+        <v-card-text class="card-text" style="background-color: rgb(46,185,38)">
             <v-layout align-center justify-center row fill-height>
                 <div class="card-body">
                     <div class="result-count">
@@ -47,6 +47,7 @@ export default {
             })
         },
         large() {
+            this.$store.commit('openlarge')
             this.$router.push('/dashboard/countlarge')
         },
         opensheet() {
