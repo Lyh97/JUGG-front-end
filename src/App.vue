@@ -85,181 +85,9 @@
                 <router-view>
                 </router-view>
             </v-content>
-            <v-btn fab bottom right color="pink" dark fixed @click.stop="dialog = !dialog">
+            <v-btn fab bottom right color="pink" dark fixed @click.stop="ClickAdd">
                 <v-icon>add</v-icon>
             </v-btn>
-            <v-dialog v-model="dialog" :width="dialogwidth">
-                <v-stepper v-model="e1">
-                    <v-stepper-header>
-                      <v-stepper-step :complete="e1 > 1" step="1">Choose Type</v-stepper-step>
-
-                      <v-divider></v-divider>
-
-                      <v-stepper-step :complete="e1 > 2" step="2">Choose Task</v-stepper-step>
-
-                      <v-divider></v-divider>
-
-                      <v-stepper-step step="3">Choose Template</v-stepper-step>
-                    </v-stepper-header>
-
-                    <v-stepper-items>
-                      <v-stepper-content step="1">
-                        <v-card>
-                            <v-card-title
-                            primary-title
-                            class="title"
-                            >Please choose your task type</v-card-title>
-                            <v-divider></v-divider>
-                            <v-card-text>
-                                <v-container fluid>
-                                    <v-layout row wrap align-center>
-                                      <v-flex xs6>
-                                        <v-subheader>Type items</v-subheader>
-                                      </v-flex>
-
-                                      <v-flex xs6>
-                                        <v-select
-                                          v-model="select"
-                                          :hint="`${select.state}, ${select.abbr}`"
-                                          :items="items"
-                                          item-text="state"
-                                          item-value="abbr"
-                                          label="Select"
-                                          persistent-hint
-                                          return-object
-                                          single-line
-                                        ></v-select>
-                                      </v-flex>
-                                    </v-layout>
-                                </v-container>
-                            </v-card-text>
-                        </v-card>
-                        <v-divider></v-divider>
-                        <v-layout align-center justify-center row pt-2>
-                            <v-btn
-                              block
-                              color="primary"
-                              @click="continueone()"
-                              class="mr-1"
-                            >
-                              Continue
-                            </v-btn>
-
-                            <v-btn block disabled class="ml-1">Back</v-btn>
-                        </v-layout>
-                      </v-stepper-content>
-
-                      <v-stepper-content step="2">
-                        <v-card>
-                            <v-card-title
-                                primary-title
-                                class="title"
-                            >
-                                Choose task
-                              <v-spacer></v-spacer>
-                              <v-text-field
-                                v-model="search"
-                                append-icon="search"
-                                label="Search"
-                                single-line
-                                hide-details
-                              ></v-text-field>
-                            </v-card-title>
-                            <v-divider></v-divider>
-                            <v-card-text>
-                                <v-data-table
-                                    :headers="headers"
-                                    :items="desserts"
-                                    :search="search"
-                                    v-model="selected"
-                                    item-key="name"
-                                    select-all
-                                    class="elevation-1"
-                                  >
-                                    <template slot="headerCell" slot-scope="props">
-                                      <v-tooltip bottom>
-                                        <span slot="activator">
-                                          {{ props.header.text }}
-                                        </span>
-                                        <span>
-                                          {{ props.header.text }}
-                                        </span>
-                                      </v-tooltip>
-                                    </template>
-                                    <template slot="items" slot-scope="props">
-                                      <td>
-                                        <v-checkbox
-                                          v-model="props.selected"
-                                          primary
-                                          hide-details
-                                        ></v-checkbox>
-                                      </td>
-                                      <td>{{ props.item.name }}</td>
-                                      <td class="text-xs-right">{{ props.item.success }}</td>
-                                      <td class="text-xs-right">{{ props.item.failure }}</td>
-                                      <td class="text-xs-right">{{ props.item.retrySuccess }}</td>
-                                      <td class="text-xs-right">{{ props.item.retryFailure}}</td>
-                                      <td class="text-xs-right">{{ props.item.successRate}}</td>
-                                    </template>
-                                </v-data-table>
-                            </v-card-text>
-                        </v-card>
-                        <v-divider></v-divider>
-                        <v-layout align-center justify-center row pt-2>
-                            <v-btn
-                              block
-                              color="primary"
-                              @click="continuetwo()"
-                              class="mr-1"
-                            >
-                              Continue
-                            </v-btn>
-
-                            <v-btn block @click="backone()" class="ml-1">Back</v-btn>
-                        </v-layout>
-                      </v-stepper-content>
-
-                      <v-stepper-content step="3">
-                        <v-card>
-                            <v-card-title
-                                primary-title
-                                class="title"
-                            >Choose your Template</v-card-title>
-                            <v-divider></v-divider>
-                            <v-card-text>
-                                <v-layout align-center justify-center row>
-                                    <v-btn dark color="success" small @click="submit()">
-                                        <v-icon dark >fa-book</v-icon>&nbsp;<span style="color: #333">Text</span>
-                                    </v-btn>
-                                    <v-btn dark color="warning" small @click="submit()">
-                                        <v-icon dark >fa-line-chart</v-icon>&nbsp;<span style="color: #333">Chart</span>
-                                    </v-btn>
-                                    <v-btn dark color="error" small @click="submit()">
-                                        <v-icon dark >fa-table</v-icon>&nbsp;<span style="color: #333">Table</span>
-                                    </v-btn>
-                                    <v-btn dark color="info" small @click="submit()">
-                                        <v-icon dark >fa-object-group</v-icon>&nbsp;<span style="color: #333">All</span>
-                                    </v-btn>
-                                </v-layout>
-                            </v-card-text>
-                        </v-card>
-                        <v-divider></v-divider>
-                        <v-layout align-center justify-center row pt-2>
-                            <v-btn
-                              block
-                              color="primary"
-                              class="mr-1"
-                              disabled
-                            >
-                              Continue
-                            </v-btn>
-
-                            <v-btn block @click="backtwo()" class="ml-1">Back</v-btn>
-                        </v-layout>
-                      </v-stepper-content>
-                    </v-stepper-items>
-                </v-stepper>
-            </v-dialog>
         </v-app>
     </div>
 </template>
@@ -273,22 +101,11 @@ export default {
     },
     data: () => ({
         dialog: false,
-        dialogwidth: '41%',
-        e1: 0,
         drawer: null,
         dialog2: false,
         isname: false,
         isconnect: false,
-        iscompany: false,
-        select: { state: 'Select count *', abbr: 'Count * ' },
-        items: [
-          { state: 'Select count *', abbr: 'Count * ' },
-          { state: 'Select *', abbr: '*' }
-        ],
-        search: '',
-        selected: [],
-        headers: [],
-        desserts: []
+        iscompany: false
     }),
     props: {
         source: String
@@ -303,10 +120,6 @@ export default {
             this.dialog2 = false
             this.edit()
         },
-        submit() {
-            this.dialog = false
-            this.e1 = 1
-        },
         edit() {
             this.isname = !this.isname
             this.isconnect = !this.isconnect
@@ -316,39 +129,13 @@ export default {
             this.dialog2 = false
             this.edit()
         },
-        continueone() {
-            this.e1 = 2
-            this.dialogwidth = '70%'
-        },
-        continuetwo() {
-            this.e1 = 3
-            this.dialogwidth = '41%'
-        },
-        backone () {
-            this.e1 = 1
-            this.dialogwidth = '41%'
-        },
-        backtwo() {
-            this.e1 = 2
-            this.dialogwidth = '70%'
-        },
-        getdessertData() {
-            this.axios.get('http://localhost:8081/static/desserts.json')
-            .then((response) => {
-                this.desserts = response.data.desserts
-            })
-        },
-        getheaderData() {
-            this.axios.get('http://localhost:8081/static/headers.json')
-            .then((response) => {
-                this.headers = response.data.headers
-            })
+        ClickAdd() {
+            this.$store.commit('changedashboard_dialog')
         }
 
     },
     created: function() {
-        this.getdessertData()
-        this.getheaderData()
+        
     }
 }
 </script>

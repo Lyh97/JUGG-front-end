@@ -11,27 +11,14 @@
         <v-divider light></v-divider>
         <v-card-text class="card-text">
             <v-layout align-center justify-center row fill-height>
-                <v-data-table v-model="selected" :headers="headers" :items="desserts"
-                    :pagination.sync="pagination" select-all item-key="name" class="elevation-1">
-                    <template slot="headers" slot-scope="props">
-                        <tr>
-                            <th v-for="header in props.headers" :key="header.text"
-                            :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
-                            @click="changeSort(header.value)">
-                                <v-icon small>arrow_upward</v-icon>
-                                {{ header.text }}
-                            </th>
-                        </tr>
-                    </template>
+                <v-data-table :headers="headers" :items="desserts" >
                     <template slot="items" slot-scope="props">
-                        <tr :active="props.selected" @click="props.selected = !props.selected">
-                            <td>{{ props.item.name }}</td>
-                            <td class="text-xs-right">{{ props.item.calories }}</td>
-                            <td class="text-xs-right">{{ props.item.fat }}</td>
-                            <td class="text-xs-right">{{ props.item.carbs }}</td>
-                            <td class="text-xs-right">{{ props.item.protein }}</td>
-                            <td class="text-xs-right">{{ props.item.iron }}</td>
-                        </tr>
+                        <td>{{ props.item.name }}</td>
+                        <td class="text-xs-right">{{ props.item.calories }}</td>
+                        <td class="text-xs-right">{{ props.item.fat }}</td>
+                        <td class="text-xs-right">{{ props.item.carbs }}</td>
+                        <td class="text-xs-right">{{ props.item.protein }}</td>
+                        <td class="text-xs-right">{{ props.item.iron }}</td>
                     </template>
                 </v-data-table>
             </v-layout>
@@ -41,7 +28,7 @@
 <script>
 export default {
     name: 'MoreTasksCountTable',
-    // props: ["title"],
+    props: ["title"],
     data() {
         return {
             pagination: {
@@ -66,7 +53,7 @@ export default {
     },
     methods: {
         getCardData() {
-            this.axios.get('http://localhost:8081/static/config.json')
+            this.axios.get('http://localhost:8080/static/config.json')
         .then((response) => {
             this.desserts = response.data.desserts
             this.title = response.data.title

@@ -2,7 +2,7 @@
   <div>
     <Count></Count>
     <CountTable></CountTable>
-    <MoreTasksCountTable></MoreTasksCountTable>
+    <MoreTasksCountTable title="MoreTasksCountTable"></MoreTasksCountTable>
     <CountLarge></CountLarge>
     <ChartLarge></ChartLarge>
     <div style="height: 50px;"></div>

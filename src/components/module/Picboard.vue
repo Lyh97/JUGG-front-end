@@ -43,7 +43,7 @@
     },
     methods: {
       getchartData() {
-        this.axios.get('http://localhost:8081/static/picconfig.json')
+        this.axios.get('http://localhost:8080/static/picconfig.json')
         .then((response)=>{
           this.chartData = response.data.chartData
           this.title = response.data.title

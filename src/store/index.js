@@ -7,11 +7,15 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
 	state: {
-    sheet: false
+    sheet: false,
+    dashboard_dialog:false
 	},
 	mutations: {
-    sheetshow(state) {
-      state.sheet = !state.sheet
-    }
+        sheetshow(state) {
+            state.sheet = !state.sheet
+        },
+        changedashboard_dialog(state) {
+            state.dashboard_dialog = !state.dashboard_dialog
+        }
 	}
 })
